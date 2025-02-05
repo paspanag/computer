@@ -6,37 +6,67 @@
 
 {
 
-  users.users.peter.packages = with pkgs; [
-    firefox
-    thunderbird
-    discord
-    git
-    mpv
-    htop
-    plan9port
-    feh
-    zathura    
-    vscode
-    gnome-frog
-    gnome3.gnome-tweaks
-  ];
+	users.users.peter.packages = with pkgs; [
+		firefox
+		thunderbird
+		discord
+		git
+		mpv
+		btop
+		plan9port
+		feh
+		zathura    
+		vscode
+		gnome-frog
+		gnome-tweaks
+		koreader
+		calibre
+		mupdf
+		obs-studio
+		chromium
+		vlc
+		krita
+		freecad
+		bambu-studio
+		orca-slicer
+		qutebrowser
+		plover.dev
+		mcomix
+		aseprite
+		blender
+		freetube
+		openscad
+		heroic
+	];
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
+	programs.steam = {
+		enable = true;
+		remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+		dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+	};
 
-  environment.gnome.excludePackages = with pkgs.gnome; [
-    cheese # webcam tool
-    epiphany # web browser
-    geary # email reader
-    evince # document viewer
-    totem # video player
-    tali # poker game
-    iagno # go game
-    hitori # sudoku game
-    atomix # puzzle game
-  ];
+	programs.nix-ld.enable = true;
+	programs.direnv.enable = true;
 
+	fonts.packages = with pkgs; [
+		noto-fonts
+		noto-fonts-cjk-sans
+		noto-fonts-emoji
+		liberation_ttf
+		fira-code
+		fira-code-symbols
+		dina-font
+		proggyfonts
+		go-font
+		atkinson-monolegible
+		atkinson-hyperlegible
+	];
+
+	programs.git = {
+		enable = true;
+		lfs.enable = true;
+	};
+
+	programs.ssh.forwardX11 = true;
+	programs.ssh.setXAuthLocation = true;
 }

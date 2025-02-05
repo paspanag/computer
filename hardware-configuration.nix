@@ -4,14 +4,18 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ 
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  #boot.kernelParams = [
+	#"iommu=pt"
+	#"amdgpu.dpm=0"
+  #];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/b9dfd3a2-882e-412c-a5f7-0e98d88afcca";
@@ -21,6 +25,11 @@
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/4C9C-2547";
       fsType = "vfat";
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/654b8023-5345-4c98-a29e-f4b7ea67fcdb";
+      fsType = "ext4";
     };
 
   swapDevices =
@@ -37,4 +46,6 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.opentabletdriver.enable = true; 
+  #hardware.cpu.amd.updateMicrocode = true;
 }
