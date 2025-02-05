@@ -103,7 +103,7 @@ in
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users.users.peter = {
 		isNormalUser = true;
-		description = "Peter Panagution";
+		description = "Pete Pan";
 		extraGroups = [ "networkmanager" "wheel" "dialout" ];
 	};
 
